@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCExample";
+
+package books;
+
+// The book service definition.
+service BooksGRPC {
+  rpc CreateBook (Book) returns (Book);
+  rpc GetBook (GetBookRequest) returns (Book);
+  rpc GetAllBooks (Empty) returns (BookList); 
+  rpc UpdateBook (Book) returns (Book);
+  rpc DeleteBook (DeleteBookRequest) returns (Book);
+}
+
+// The book message.
+message Book {
+  int32 id = 1;
+  string title = 2;
+  string author = 3;
+}
+
+message BookList {
+  repeated Book books = 1; // List of books
+}
+
+// Request message for GetBook.
+message GetBookRequest {
+  int32 id = 1;
+}
+
+// Request message for DeleteBook.
+message DeleteBookRequest {
+  int32 id = 1;
+}
+message Empty {}
